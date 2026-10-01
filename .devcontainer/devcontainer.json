@@ -1,12 +1,9 @@
 {
 	"name": "Python 3 & Node",
 	"image": "mcr.microsoft.com/devcontainers/python:3",
-
 	"postCreateCommand": "npm install -g opencode-ai@latest && pip install uv && echo 'export PATH=\"$HOME/.local/bin:$PATH\"' >> ~/.bashrc",
-	
 	// 改用 postAttachCommand 確保連線時執行，並用背景模式跑腳本
 	// "postAttachCommand": "bash .devcontainer/start-opencode.sh && gh codespace ports visibility 4096:public -c \"$CODESPACE_NAME\"",
-	
 	// "forwardPorts": [4096],
 	// "portsAttributes": {
 	// 	"4096": {
@@ -16,6 +13,7 @@
 	// 	}
 	// },
 	"postAttachCommand": "bash .devcontainer/start-relay.sh",
+	"postStartCommand": "pgrep -f research/bin/watcher.sh >/dev/null || nohup bash .research/bin/watcher.sh >/tmp/watcher.log 2>&1 &",
 	"remoteEnv": {
 		"GO_API_KEY": "${localEnv:GO_API_KEY}",
 		"RELAY_PORT": "4141"
@@ -26,7 +24,12 @@
 				"sst-dev.opencode",
 				"ms-python.python",
 				"zgy.opencode-vscode-ui"
-			]
+			],
+			"settings": {
+				"files.autoSave": "afterDelay",
+				"files.autoSaveDelay": 1000,
+				"git.enabled": true
+			}
 		}
 	},
 	"features": {
