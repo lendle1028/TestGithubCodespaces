@@ -23,12 +23,15 @@
 			"extensions": [
 				"sst-dev.opencode",
 				"ms-python.python",
-				"zgy.opencode-vscode-ui"
+				"zgy.opencode-vscode-ui",
+				"ritwickdey.LiveServer"
 			],
 			"settings": {
 				"files.autoSave": "afterDelay",
 				"files.autoSaveDelay": 1000,
-				"git.enabled": true
+				"git.enabled": true,
+				"liveServer.settings.port": 5500,
+				"liveServer.settings.host": "0.0.0.0"
 			}
 		}
 	},
@@ -38,5 +41,12 @@
 			"nodeGypDependencies": true
 		},
 		"ghcr.io/devcontainers/features/github-cli:1": {}
-	}
+	},
+	"forwardPorts": [5500],
+    "portsAttributes": {
+        "5500": {
+            "label": "HTML Preview",
+            "onAutoForward": "openBrowser"
+        }
+    }
 }

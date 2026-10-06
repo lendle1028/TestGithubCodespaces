@@ -6,7 +6,8 @@
       "name": "Class AI Relay",
       "options": {
         "baseURL": "http://127.0.0.1:4141/v1",
-        "apiKey": "placeholder"
+        "apiKey": "placeholder",
+        "reasoningEffort": "none"
       },
       "models": {
         "coding": {
