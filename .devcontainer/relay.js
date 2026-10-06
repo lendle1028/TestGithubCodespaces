@@ -141,12 +141,12 @@ const DEBUG =
 
 const PRIMARY_MODEL =
   process.env.PRIMARY_MODEL ||
-  'cohere/north-mini-code:free';
+  'openrouter/free';
 
 
 const FALLBACK_MODELS = (
   process.env.FALLBACK_MODELS ||
-  'qwen/qwen3.8-27b:free,openrouter/auto'
+  'cohere/north-mini-code:free,openrouter/auto'
 )
   .split(',')
   .map(s => s.trim())
