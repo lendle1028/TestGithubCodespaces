@@ -6,7 +6,7 @@ description: 在 Step 1，學生提出自己的嘗試時，記錄該嘗試的原
 執行下列指令。heredoc 內放「學生嘗試的原文」，逐字複製，不得改寫、摘要或補充：
 
 ```bash
-bash .research/bin/record.sh .attemptlog 1 30 2 <<'EOF'
+bash .research/bin/record.sh .attemptlog 1 5 2 <<'EOF'
 （學生嘗試的原文）
 EOF
 ```
