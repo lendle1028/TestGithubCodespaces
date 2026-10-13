@@ -13,7 +13,7 @@
 	// 	}
 	// },
 	"postAttachCommand": "bash .devcontainer/start-relay.sh",
-	"postStartCommand": "pgrep -f research/bin/watcher.sh >/dev/null || nohup bash .research/bin/watcher.sh >/tmp/watcher.log 2>&1 &",
+	"postStartCommand": "pgrep -f research/bin/watcher.py >/dev/null || nohup uv run .research/bin/watcher.py >/tmp/watcher.log 2>&1 &",
 	"remoteEnv": {
 		"GO_API_KEY": "${localEnv:GO_API_KEY}",
 		"RELAY_PORT": "4141"
