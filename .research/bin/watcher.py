@@ -13,7 +13,12 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+from lib import ensure_baseline_ref
+
 os.chdir(Path(__file__).resolve().parents[2])
+
+# 學生動手之前先記錄 Step 1 的基準 commit，之後才能穩定偵測檔案變更。
+ensure_baseline_ref()
 
 INTERVAL = int(os.environ.get("INTERVAL", "30"))
 PUSH_INTERVAL = int(os.environ.get("PUSH_INTERVAL", "300"))
