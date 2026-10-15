@@ -146,7 +146,7 @@ const PRIMARY_MODEL =
 
 const FALLBACK_MODELS = (
   process.env.FALLBACK_MODELS ||
-  'cohere/north-mini-code:free,openrouter/auto'
+  'openrouter/free,openrouter/auto'
 )
   .split(',')
   .map(s => s.trim())

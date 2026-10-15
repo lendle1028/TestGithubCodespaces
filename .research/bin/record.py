@@ -16,6 +16,7 @@ from lib import chdir_root, cur_step, now, set_step
 chdir_root()
 
 folder, expected, minimum, nxt = sys.argv[1], sys.argv[2], int(sys.argv[3]), sys.argv[4]
+folder=".logs/"+folder
 event = folder[1:] if folder.startswith(".") else folder
 cur = cur_step()
 # 模擬 bash $(cat)：去掉結尾換行

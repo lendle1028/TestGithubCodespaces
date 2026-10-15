@@ -52,7 +52,7 @@ def _git_diff_attempt() -> str:
 
 def _record_attempt_log(text: str) -> None:
     """按照 attempt-log skill 的規則記錄原文；字數 > 5 時進入 Step 2。"""
-    folder = Path(".attemptlog")
+    folder = Path(".logs/.attemptlog")
     folder.mkdir(parents=True, exist_ok=True)
     ts = now()
     file_path = folder / f"{ts}.md"

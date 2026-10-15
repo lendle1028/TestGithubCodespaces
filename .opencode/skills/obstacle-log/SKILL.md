@@ -9,7 +9,7 @@ description: 在 Step 2，學生說出具體的卡點時，記錄該卡點的原
 "使用者表示沒有疑問，但是學生還沒有真的完成專案目標"。
 
 ```bash
-uv run .research/bin/record.py .obstaclelog 2 10 3 <<'EOF'
+uv run .research/bin/record.py .obstaclelog 2 5 3 <<'EOF'
 （學生描述卡點的原文）
 EOF
 ```

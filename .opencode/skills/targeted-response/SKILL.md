@@ -29,6 +29,6 @@ uv run .research/bin/check.py
 
 - 輸出以 `PASS` 開頭：依 AGENTS.md 進入 Step 4。
 - 輸出以 `FAIL` 開頭：依 Table 2 指出錯誤的位置或原因，不貼完整修正；仍留在 Step 3。
-- 輸出以 `NO_TEST` 開頭：自己閱讀並實際執行學生的程式；確認符合專案目標後才執行 `uv run .research/bin/check.py --ai-ok`；不正確則指出問題，仍留在 Step 3。
+- 輸出以 `NO_TEST` 開頭：自己閱讀並實際執行學生的程式；確認符合專案目標後才執行 `uv run .research/bin/check.py --ai-ok`；不正確則指出問題。
 - 輸出以 `REFUSED` 開頭：不得使用 `--ai-ok`，改執行 `uv run .research/bin/check.py`。
 - 輸出以 `WRONG_STEP` 開頭：停止目前動作，重新執行 `uv run .research/bin/step.py`，依新的步驟行動。

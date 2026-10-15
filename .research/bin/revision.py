@@ -26,7 +26,7 @@ if not final or not Path(final).is_file():
     print(f"ERROR 找不到最終檔案：'{final}'。請向學生確認路徑。")
     sys.exit(1)
 
-revision_dir = Path(".revisiondiff")
+revision_dir = Path(".logs/.revisiondiff")
 revision_dir.mkdir(exist_ok=True)
 ts = now()
 shutil.copy(final, revision_dir / f"{ts}.final.txt")
@@ -52,8 +52,8 @@ def read_all(pattern: str) -> str:
 
 
 final_grams = grams(Path(final).read_text(encoding="utf-8", errors="ignore"))
-att = set(grams(read_all(".attemptlog/*.md")))
-ai = set(grams(read_all(".targetedresponse/*.md")))
+att = set(grams(read_all(".logs/.attemptlog/*.md")))
+ai = set(grams(read_all(".logs/.targetedresponse/*.md")))
 
 n = len(final_grams)
 a = sum(1 for g in final_grams if g in att and g not in ai)
