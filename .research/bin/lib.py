@@ -37,7 +37,7 @@ def _git_diff_attempt() -> str:
     """取得 .devcontainer / .opencode / .research 以外的 git diff。"""
     try:
         proc = subprocess.run(
-            ["git", "diff", "--", ".", ":!.devcontainer", ":!.opencode", ":!.research"],
+            ["git", "diff", "--", ".", ":!.devcontainer/**", ":!.opencode/**", ":!.research/**",":!.flows/**", ":!AGENTS.md"],
             cwd=_repo_root(),
             capture_output=True,
             text=True,
@@ -75,7 +75,8 @@ def cur_step() -> str:
     else:
         log = Path(LOG)
         if not log.exists():
-            return ""
+            set_step("1", "init")
+            return "1"
         lines = log.read_text(encoding="utf-8", errors="ignore").splitlines()
         if not lines:
             return ""
@@ -84,7 +85,7 @@ def cur_step() -> str:
 
     if (
         raw == "1"
-        and not _is_called_from_skill_script()
+        #and not _is_called_from_skill_script()
         and not os.environ.get("_CUR_STEP_DIFF_CHECK")
     ):
         os.environ["_CUR_STEP_DIFF_CHECK"] = "1"
@@ -101,7 +102,10 @@ def cur_step() -> str:
 
 def set_step(new_step: str, event: str, extra: str = "") -> None:
     """更新 step.now；只有 step 真正變化時才寫入 step.log（只增不改）。"""
-    old = cur_step()
+    if not event=="init":
+        old = cur_step()
+    else:
+        old=0
     Path(STEP_NOW).write_text(new_step + "\n", encoding="utf-8")
     if new_step == old:
         return

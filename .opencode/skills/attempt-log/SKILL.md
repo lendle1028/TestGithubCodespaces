@@ -11,7 +11,8 @@ uv run .research/bin/record.py .attemptlog 1 5 2 <<'EOF'
 EOF
 ```
 
-依輸出行動：
-- `PASS`：依 AGENTS.md 進入 Step 2。
-- `SHORT`：請學生補充更多自己的想法，不要代替他寫。
-- `WRONG_STEP`：停止，重新執行 `uv run .research/bin/step.py`。
+`record.py` 會輸出 `PASS ...`、`SHORT ...` 或 `WRONG_STEP ...`。請以**輸出開頭的第一個單字**作為狀態判斷：
+
+- 輸出以 `PASS` 開頭：已進入 Step 2。依 AGENTS.md 進入 Step 2，告訴學生請動手實作，卡住時說明「卡在哪裡」。
+- 輸出以 `SHORT` 開頭：請學生補充更多自己的想法，不要代替他寫。
+- 輸出以 `WRONG_STEP` 開頭：停止目前動作，重新執行 `uv run .research/bin/step.py`，依新的步驟行動。

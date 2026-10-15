@@ -1,0 +1,1 @@
+在test.html網頁上，加入一個輸入 email 的欄位，且這個欄位能自動檢查 user 的輸入是否是合理的 email
