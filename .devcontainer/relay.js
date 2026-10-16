@@ -204,19 +204,19 @@ function delayForNextRequest() {
   // Delay policy
   // ----------------------------------------------------------
 
-  if (count <= 15) {
+  if (count <= 10) {
     return 0;
   }
 
   if (count <= 40) {
-    return 5000;
+    return 7500;
   }
 
   if (count <= 70) {
-    return 15000;
+    return 18000;
   }
 
-  if (count <= 95) {
+  if (count <= 85) {
     return 30000;
   }
 
