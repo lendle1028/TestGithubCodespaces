@@ -78,7 +78,7 @@ const LISTEN_PORT =
 
 const UPSTREAM_BASE =
   process.env.UPSTREAM_BASE ||
-  'https://openrouter.ai/api/v1';
+  `https://gateway.ai.cloudflare.com/v1/${process.env.CLOUDFLARE_ACCOUNT_ID}/lendle-gateway/openrouter/v1`;
 
 
 // ------------------------------------------------------------
@@ -88,11 +88,14 @@ const UPSTREAM_BASE =
 // 優先使用 OPENROUTER_API_KEY。
 // 為了相容舊設定，也接受 GO_API_KEY。
 //
-
 const UPSTREAM_API_KEY =
-  process.env.OPENROUTER_API_KEY ||
-  process.env.GO_API_KEY ||
+  process.env.CLOUDFLARE_GATEWAY_KEY ||
   '';
+
+// const UPSTREAM_API_KEY =
+//   process.env.OPENROUTER_API_KEY ||
+//   process.env.GO_API_KEY ||
+//   '';
 
 
 // 如果沒有 API key，直接停止。
@@ -910,9 +913,10 @@ const server =
       // The student's Authorization header is deliberately
       // ignored. The Relay owns the upstream credential.
       //
-
-      finalHeaders.authorization =
-        `Bearer ${UPSTREAM_API_KEY}`;
+      finalHeaders['cf-aig-authorization'] =
+          `Bearer ${UPSTREAM_API_KEY}`;
+      // finalHeaders.authorization =
+      //   `Bearer ${UPSTREAM_API_KEY}`;
 
 
       // --------------------------------------------------------
