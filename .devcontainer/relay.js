@@ -78,7 +78,7 @@ const LISTEN_PORT =
 
 const UPSTREAM_BASE =
   process.env.UPSTREAM_BASE ||
-  `https://gateway.ai.cloudflare.com/v1/${process.env.CLOUDFLARE_ACCOUNT_ID}/lendle-gateway/openrouter/v1`;
+  `https://gateway.ai.cloudflare.com/v1/${process.env.CLOUDFLARE_ACCOUNT_ID}/lendle-gateway/openrouter`;
 
 
 // ------------------------------------------------------------
@@ -116,12 +116,12 @@ if (!UPSTREAM_API_KEY) {
 }
 
 
-// 每 30 分鐘一個 cycle
+// 每 60 分鐘一個 cycle
 const CYCLE_MS =
-  30 * 60 * 1000;
+  60 * 60 * 1000;
 
 
-// 最大 request body
+// 最大 request body``
 const MAX_BODY_SIZE =
   Number(
     process.env.MAX_BODY_SIZE ||
@@ -142,12 +142,12 @@ const DEBUG =
 // OpenRouter model routing
 // ============================================================
 
-const PRIMARY_MODEL =
+let PRIMARY_MODEL =
   process.env.PRIMARY_MODEL ||
   'openrouter/free';
 
 
-const FALLBACK_MODELS = (
+let FALLBACK_MODELS = (
   process.env.FALLBACK_MODELS ||
   'openrouter/free,openrouter/auto'
 )
@@ -641,6 +641,33 @@ function rewriteOpenRouterBody(
   body.model =
     PRIMARY_MODEL;
 
+	// ----------------------------------------------------------
+	// Force routing
+	// ----------------------------------------------------------
+
+	if (count <= 70) {
+
+	  // Request 1–70:
+	  // openrouter/free → openrouter/auto
+	  body.model =
+		PRIMARY_MODEL;
+
+	  body.models =
+		FALLBACK_MODELS;
+
+	} else {
+
+	  // Request 71+:
+	  // free only
+	  // 不允許 fallback 到 paid model
+	  body.model =
+		PRIMARY_MODEL;
+
+	  body.models =
+		["openrouter/free"];
+
+	  delete body.models;
+	}
 
   body.models =
     FALLBACK_MODELS;
